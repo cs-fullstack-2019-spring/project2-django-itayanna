@@ -1,0 +1,23 @@
+{% extends 'big2App/base.html' %}
+
+{% block content %}
+    <h2>Search Results</h2>
+    <hr/>
+    {% if all_entries %}
+            {% for eachEntry in all_entries %}
+
+
+                    <a href="{% url 'entryDetails' eachEntry.id %}"><h3>{{ eachEntry.title }}</h3></a>
+                    {% for eachItem in related_items %}
+                        {% if eachItem.entry_model_fk.title == eachEntry.title %}
+                            <p>Related Item: {{ eachItem.title }}</p>
+                        {% endif %}
+                    {% endfor %}
+            {% endfor %}
+    {% else %}
+
+        <h3>No Entries match your search</h3>
+
+    {% endif %}
+    <a href="{% url 'home' %}"><button class="btn btn-primary">Back to Home</button></a>
+{% endblock %}

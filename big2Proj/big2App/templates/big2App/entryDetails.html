@@ -1,0 +1,30 @@
+{% extends 'big2App/base.html' %}
+
+
+
+{% block content %}
+
+<h1>{{ selectedEntry.title }}</h1>
+<br/>
+{{ selectedEntry.text }}
+<br/>
+{{ selectedEntry.authour }}
+<br/>
+    {% if relatedContent %}
+    <p>{{ relatedContent }}</p>
+    {%  endif %}
+
+{% if request.user == selectedEntry.authour %}
+<a href="{% url 'editPost' selectedEntry.id %}">
+    <button>Edit Post</button>
+</a>
+<a href="{% url 'deletePost' selectedEntry.id %}">
+    <button>Delete Post</button>
+</a>
+<a href="{% url 'createRelated' %}">
+    <button>Add Related</button>
+</a>
+{% endif %}
+
+
+{% endblock content %}

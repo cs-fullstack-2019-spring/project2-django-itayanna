@@ -1,0 +1,49 @@
+{% extends 'big2App/base.html' %}
+
+
+{% block header %}
+
+{% if request.user.is_authenticated %}
+<h1>Welcome {{ user.username }}!</h1>
+{% else %}
+<h1>Welcome!</h1>
+{% endif %}
+
+
+{% endblock header %}
+
+
+{% block content %}
+
+<form method="post" id="signUpForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>SUBMIT</button>
+</form>
+
+<div id="logButton">
+    {% if user.is_authenticated %}
+    <a href="{% url 'logout' %}"><button>Login Out</button></a>
+    {% else %}
+    <a href="{% url 'login' %}"><button>Login Here</button></a>
+    {% endif %}
+</div>
+
+    <div id="entries">
+{% for post in allEntries %}
+
+    <div class="card-body">
+        <a href="{% url 'entryDetails' post.id %}"><h4 class="card-title">{{ post.title }}</h4></a>
+        <p class="card-text">Date Created: {{ post.dateCreated }}
+        <br>
+        Last Updated: {{ post.lastUpdate }}</p>
+    </div>
+{% endfor %}
+
+    </div>
+
+
+
+
+
+{% endblock content %}

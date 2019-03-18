@@ -1,0 +1,16 @@
+{% extends 'big2App/base.html' %}
+
+{% block header %}
+<h1>Create Entry</h1>
+{% endblock header %}
+
+
+{% block content %}
+
+<form method="post" id="signUpForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>SUBMIT</button>
+</form>
+
+{% endblock content %}

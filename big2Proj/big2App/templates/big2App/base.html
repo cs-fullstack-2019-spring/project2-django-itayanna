@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wiki Mock</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'big2App/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'big2App/css/base.css' %}">
+    <script src="{% static 'big2App/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'big2App/js/bootstrap.js' %}"></script>
+</head>
+<body class="container" id="backdrop">
+
+
+<div class="jumbotron" id="header">
+{% block header %}
+{% endblock header %}
+</div>
+
+<nav>
+{% block navbar %}
+<a href="{% url 'home' %}">Home</a>
+/
+<a href="{% url 'createEntry' %}">Add New Entry</a>
+/
+<a href="{% url 'profile' %}">Profile</a>
+
+{% endblock navbar %}
+</nav>
+
+
+{% block searchbar %}
+
+    <form class="searchBar" action="{% url 'searchResults' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="searchBar">
+        <button type="submit">Search</button>
+    </form>
+
+{% endblock searchbar %}
+
+{% block content %}
+
+{% endblock content %}
+</body>
+</html>

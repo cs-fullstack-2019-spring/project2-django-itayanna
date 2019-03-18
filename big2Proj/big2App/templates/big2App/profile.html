@@ -1,0 +1,47 @@
+{% extends 'big2App/base.html' %}
+
+
+{% block header %}
+<h1>Porfile</h1>
+{% endblock header %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+<h2 class="header2">{{ request.user }} Entries</h2>
+{% if urEntries %}
+
+    <div class="card-body" id="myentries">
+{% for post in urEntries %}
+    <a href="{% url 'entryDetails' post.id %}"><h4 class="card-title">{{ post.title }}</h4></a>
+    <p class="card-text">Date Created: {{ post.dateCreated }}<br>
+            Last Updated: {{ post.lastUpdate }}
+    {{ post.text }}
+    <br>
+    <a href="{% url 'editPost' post.id %}"><button>Edit</button></a>
+    <a href="{% url 'deletePost' post.id %}"><button>Delete</button></a>
+    <br>
+    <a href="{% url 'createRelated' post.id %}"><button>Add Related Content</button></a>
+    <a href="{% url 'editRelated' post.id %}"><button>Edit Related Content</button></a>
+            <br>
+    Date Created: {{ post.dateCreated }}
+    <br>
+    Last Updated: {{ post.lastUpdate }}
+    <br>
+        </p>
+
+{% endfor %}
+    </div>
+    {%  endif %}
+
+{% else %}
+
+<h4>No entries to show</h4>
+
+
+{% endif %}
+
+
+
+
+{% endblock content %}
